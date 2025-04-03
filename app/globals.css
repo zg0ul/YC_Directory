@@ -10,8 +10,8 @@ body {
 @theme {
   --breakpoint-xs: 29.6875rem; /* 475px */
 
-  --color-primary: #ffe8f0;
-  --color-primary-100: #ee2b69;
+  --color-primary: #EE2B69;
+  --color-primary-100: #FFE8F0;
   --color-secondary: #fbe843;
   --color-black: #000000;
   --color-black-100: #333333;
@@ -76,7 +76,7 @@ body {
 }
 
 @utility pink_container {
-  @apply w-full bg-primary-100 min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6;
+  @apply w-full bg-primary min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6;
 }
 
 @utility tag {
