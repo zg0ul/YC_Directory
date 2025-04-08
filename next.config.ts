@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  devIndicators: false,
   images: {
     dangerouslyAllowSVG: true, // to only allow the placeholder svg.
     remotePatterns: [
@@ -10,7 +9,10 @@ const nextConfig: NextConfig = {
         hostname: "*",
       }
     ]
-  }
+  }, 
+  experimental: {
+    ppr: "incremental",
+  },
 };
 
 export default nextConfig;

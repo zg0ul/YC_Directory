@@ -4,17 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
+import { Author, Startup } from "@/sanity.types";
 
-const StartUpCard = ({ post }: { post: StartupTypeCard }) => {
+export type StartupCardType = Omit<Startup, "author"> & { author?: Author };
+
+const StartUpCard = ({ post }: { post: StartupCardType }) => {
   const {
     _createdAt,
     views,
-    author: { _id: autherId, name: authorName },
+    author,
     _id: postId,
     title,
     category,
     image,
-    desciption,
+    description,
   } = post;
 
   return (
@@ -29,14 +32,14 @@ const StartUpCard = ({ post }: { post: StartupTypeCard }) => {
 
       <div className="flex-between mt-5 gap-5">
         <div className="flex-1">
-          <Link href={`/user/${autherId}`}>
-            <p className="text-16-medium line-clamp-1">{authorName}</p>
+          <Link href={`/user/${author?._id}`}>
+            <p className="text-16-medium line-clamp-1">{author?.name}</p>
           </Link>
           <Link href={`/startup/${postId}`}>
             <h3 className="text-26-semibold line-clamp-1">{title}</h3>
           </Link>
         </div>
-        <Link href={`/user/${autherId}`}>
+        <Link href={`/user/${author?._id}`}>
           <Image
             src="https://placehold.co/48x48"
             alt="placeholder"
@@ -47,13 +50,13 @@ const StartUpCard = ({ post }: { post: StartupTypeCard }) => {
         </Link>
       </div>
       <Link href={`/startup/${postId}`}>
-        <p className="startup_card_desc">{desciption}</p>
+        <p className="startup_card_desc">{description}</p>
 
         <img src={image} alt="placeholder" className="startup-card_img" />
       </Link>
       <div className="flex-between gap-3 mt-5">
-        <Link href={`/?query=${category.toLowerCase()}`}>
-          <p className="text-16-medium">{category.toLowerCase()}</p>
+        <Link href={`/?query=${category?.toLowerCase()}`}>
+          <p className="text-16-medium">{category?.toLowerCase()}</p>
         </Link>
         <Button className="startup-card_btn" asChild>
           <Link href={`/startup/${postId}`}>Details</Link>
