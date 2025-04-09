@@ -25,7 +25,7 @@ export const STARTUP_BY_ID_QUERY =
   pitch,
   category, 
   author -> {
-    _id, name, slug, image, bio
+    _id, name, slug, image, bio, username
   }, 
   description, 
   image
