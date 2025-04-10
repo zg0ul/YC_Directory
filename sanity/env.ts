@@ -11,6 +11,8 @@ export const dataset = assertValue(
   'Missing environment variable: NEXT_PUBLIC_SANITY_DATASET'
 )
 
+export const token = process.env.SANITY_WRITE_TOKEN
+
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
     throw new Error(errorMessage)
