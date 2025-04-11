@@ -7,6 +7,7 @@ import { writeClient } from "./sanity/lib/write-client";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [GitHub],
   callbacks: {
+    // This callback is called when a user signs in
     async signIn({
       user: { name, email, image },
       profile: { id, login, bio },
@@ -30,6 +31,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return true;
     },
 
+    // customizes the JWT (JSON Web Token) that Next-Auth uses to keep track of the logged-in user
     async jwt({ token, account, profile }) {
       if (account && profile) {
         const user = await client.fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
