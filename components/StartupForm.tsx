@@ -9,7 +9,8 @@ import { Send } from "lucide-react";
 import { formSchema } from "@/lib/validation";
 import { z } from "zod";
 import { toast } from "sonner";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import { createPitch } from "@/lib/actions";
 
 function StartupForm() {
   const [errors, seterrors] = useState<Record<string, string>>({});
@@ -30,17 +31,18 @@ function StartupForm() {
 
       console.log("Form values are valid:", formValues);
 
-      // const result = await createIdea(prevState, formData, pitch);
-      // console.log(result);
+      const result = await createPitch(prevState, formData, pitch);
 
-    //   if (result.status === "SUCCESS") {
-    //     toast.success("Success", {
-    //       description: "Your startup has been submitted successfully",
-    //     });
-    //     router.push(`/startup/${result.id}`);
-    //   }
-        
-    //     return result
+      if (result.status === "SUCCESS") {
+        toast.success("Success", {
+          description: "Your startup has been submitted successfully",
+          richColors: true,
+          duration: 2000,
+        });
+        router.push(`/startup/${result._id}`);
+      }
+
+      return result;
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors = error.flatten().fieldErrors;
@@ -49,6 +51,7 @@ function StartupForm() {
 
         toast.error("Error", {
           description: "Please check your inputs and try again",
+          richColors: true,
         });
 
         return { ...prevState, error: "Validation failed", status: "ERROR" };
