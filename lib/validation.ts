@@ -10,12 +10,13 @@ export const formSchema = z.object({
     .refine(async (url) => {
       try {
         const res = await fetch(url, { method: "HEAD" });
-          const contentType = res.headers.get("content-type");
-          
+        const contentType = res.headers.get("content-type");
+
         return contentType?.startsWith("image/");
       } catch (error) {
+        console.log("Error fetching URL:", error);
         return false;
       }
     }),
-    pitch: z.string().min(10),
+  pitch: z.string().min(10),
 });

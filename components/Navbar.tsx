@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 async function Navbar() {
   const session = await auth();
-  console.log("session", session.id);
+  console.log("session", session?.id);
   return (
     <div className="px-5 py-3 bg-white shadow-sm font-work-sans">
       <nav className="flex justify-between items-center">

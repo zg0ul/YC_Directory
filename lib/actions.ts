@@ -6,7 +6,7 @@ import slugify from "slugify";
 import { writeClient } from "@/sanity/lib/write-client";
 
 export const createPitch = async (
-  state: any,
+  state: { error: string; status: string },
   form: FormData, // all the form data in the create page
   pitch: string // the pitch that is in markdown format
 ) => {
